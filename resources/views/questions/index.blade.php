@@ -36,10 +36,10 @@
                             <h3 class="mt-0"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
                                     <div class="ml-auto">
                                       <!-- @ if(Auth::user()->can('update-question',$question)) -->
-                                      @can('update',$question))
+                                      @can('update',$question)
                                         <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-info">Edit</a>
                                       @endcan
-                                      @can('delete',$question))
+                                      @can('delete',$question)
                                         <form class="form-delete" method="post" action="{{ route('questions.destroy', $question->id) }}">
                                             @method('DELETE')
                                             @csrf

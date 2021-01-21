@@ -15,7 +15,16 @@ class Answer extends Model
         return $this->belongsTo(User::class); 
     }
 
-    public function getBodyHtmlAttribute(){
+    public function getBodyHtmlAttribute(){  //parsing Markdown into html
         return \Parsedown::instance()->text($this->body);
     }
+
+    public static function boot(){  //for eloquent event handling
+        parent::boot();
+        static::created(function($answer){
+            $answer->question->increment('answers_count');
+            $answer->question->save();
+        });
+        
+    } 
 }
